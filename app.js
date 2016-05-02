@@ -23,7 +23,7 @@ var app = express();
 // connect to the MongoDB with mongoose
 require('./config/database');
 require('./config/passport');
-
+require('./config/key');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
