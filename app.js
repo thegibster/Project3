@@ -7,6 +7,9 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var passport = require('passport');
 
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/family-tree');
+
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
