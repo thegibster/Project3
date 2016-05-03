@@ -1,0 +1,42 @@
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>Rosetta Chat</title>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">  <link type="text/css" rel="stylesheet" href="stylsheets/style.css">
+<!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <script src="../js/main.js" type="text/javascript" charset="utf-8" async defer></script>
+</head>
+<body>
+  <!-- Nav bar -->
+  <nav class="cyan accent-4" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Rosetta Chat</a>
+      <ul class="right hide-on-med-and-down">
+        <$ if (user) { $>
+          <li><a href="/logout"><i class="material-icons left">trending_flat</i>Logout</a></li>
+          <$ } else { $>
+          <li><a href="/auth/google"><i class="material-icons left">vpn_key</i>Login with Google</a></li>
+          <$ } $>
+      </ul>
+
+      <ul id="nav-mobile" class="side-nav">
+        <li><a href="#">Navbar Link</a></li>
+      </ul>
+      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+
+
+<!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="/js/materialize.js"></script>
+  <script src="/js/init.js"></script>
+
+</body>
+</html>
