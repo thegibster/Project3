@@ -2,11 +2,6 @@ var express = require('express');
 var router = require('express').Router();
 var passport = require('passport')
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express', user: req.user });
-});
-
 // The root route renders our only view
 router.get('/', function(req, res) {
   console.log(req.user);
