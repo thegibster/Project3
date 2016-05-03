@@ -28,10 +28,11 @@ router.get('/oauth2callback', passport.authenticate(
     failureRedirect : '/'
   }
 ));
+
 // OAuth logout route
 router.get('/logout', function(req, res){
   req.logout();
-  res.redirect('/');
+  res.redirect('/splash');
 });
 
 router.get('/splash', function (req,res,next) {
