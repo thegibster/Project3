@@ -4,7 +4,7 @@ var passport = require('passport')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'Express', user: req.user });
 });
 
 // The root route renders our only view
@@ -24,6 +24,10 @@ router.get('/logout', function(req, res){
   req.logout();
   res.redirect('/');
 });
+
+router.get('/splash', function (req,res,next) {
+  res.render('splash', { user: req.user })
+})
 
 
 module.exports = router;
