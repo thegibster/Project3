@@ -14,6 +14,15 @@
 </head>
 <body>
 
+<script>
+  //letting client side js know what our user id is
+  //this makes it vidible to the js running in the web page
+    var userId = '';
+    <$ if (user) { $>
+      userId = '<$= user.id $>';
+    <$ } $>
+  </script>
+
 <!-- Nav bar -->
   <nav class="cyan accent-4" role="navigation">
     <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Rosetta Chat</a>
@@ -41,6 +50,10 @@
         <form id="form1" runat="server">
           <h1>Rosessta Chat</h1>
           <h2>Input</h2>
+          <$ if (user) { $>
+            <span><$= user.name $></span>
+          <$ } $>
+
 
           <select id="user1">
             <option value="en">English</option>
