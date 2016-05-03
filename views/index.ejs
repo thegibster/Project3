@@ -11,7 +11,19 @@
   <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <script src="../js/materialize.js" type="text/javascript" charset="utf-8" async defer></script>
+
+<script>
+  //letting client side js know what our user id is
+  //this makes it vidible to the js running in the web page
+    var userId = '';
+    <$ if (user) { $>
+      userId = '<$= user.id $>';
+    <$ } $>
+</script>
+
+
 </head>
+
 <body>
 
 <script>
@@ -88,7 +100,12 @@
       </div>
     </div>
   </div>
-
+ <script>
+    var userId = '';
+    <$ if (user) { $>
+      userId = '<$= user.id $>';
+    <$ } $>
+  </script>
 
   <!--  Scripts-->
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"
