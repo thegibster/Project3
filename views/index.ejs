@@ -126,8 +126,9 @@ $(document).ready(function(e){
   });
 
   $('#btnAjaxTranslate').click(function(e){
-
-    socket.emit('wasClicked', $('#txtAjaxInput').val(), function(data){
+    var pleaseTranslateMe = $('#txtAjaxInput').val();
+    socket.emit('wasClicked', pleaseTranslateMe, function(data){
+      console.log(data + " was clicked was run heere ");
       // token =data.toString();
       // console.log(token)
       // $chat.append('<span class="error">' + token +"runs line 124 index" +"</span><br/>");
@@ -135,36 +136,37 @@ $(document).ready(function(e){
 
   });
 
-        $('#btnAjaxTranslate').click(function (evt) {
-        var inputText = $('#txtAjaxInput').val();
-        user1txt = $('#txtAjaxInput').val();
-        // var token=;
-        console.log(token+ " this is for the trnalation");
-        var authToken =token;
-        var data = {
-          appId: 'Bearer ' + authToken,
-          from: $("#user1").val(),
-          to: $("#user2").val(),
-          contentType: 'text/plain',
-          text: inputText
-        };
-        $.ajax({
-          url: "http://api.microsofttranslator.com/V2/Ajax.svc/Translate",
-          dataType: 'jsonp',
-          data: data,
-          jsonp: 'oncomplete'
-        })
-        .done(function (jqXHR, textStatus, errorThrown) {
-          console.log('done', this, jqXHR, textStatus, errorThrown);
-          console.log(jqXHR);
-          $('#txtAjaxOutput').append($('#txtAjaxInput').val()+'<br>');
-          $('#txtAjaxOutput2').append("<div>"+(jqXHR)+"</div>");
-        })
-        .fail(function (jqXHR, textStatus, errorThrown) {
-          console.log('fail', this, jqXHR, textStatus, errorThrown);
-        });
-      });
+      //   $('#btnAjaxTranslate').click(function (evt) {
+      //   var inputText = $('#txtAjaxInput').val();
+      //   user1txt = $('#txtAjaxInput').val();
+      //   // var token=;
+      //   console.log(token+ " this is for the trnalation");
+      //   var authToken =token;
+      //   var data = {
+      //     appId: 'Bearer ' + authToken,
+      //     from: $("#user1").val(),
+      //     to: $("#user2").val(),
+      //     contentType: 'text/plain',
+      //     text: inputText
+      //   };
+      //   $.ajax({
+      //     url: "http://api.microsofttranslator.com/V2/Ajax.svc/Translate",
+      //     dataType: 'jsonp',
+      //     data: data,
+      //     jsonp: 'oncomplete'
+      //   })
+      //   .done(function (jqXHR, textStatus, errorThrown) {
+      //     console.log('done', this, jqXHR, textStatus, errorThrown);
+      //     console.log(jqXHR);
+      //     $('#txtAjaxOutput').append($('#txtAjaxInput').val()+'<br>');
+      //     $('#txtAjaxOutput2').append("<div>"+(jqXHR)+"</div>");
+      //   })
+      //   .fail(function (jqXHR, textStatus, errorThrown) {
+      //     console.log('fail', this, jqXHR, textStatus, errorThrown);
+      //   });
+      // });
   socket.on('back2Front',function(data){
+    $('#txtAjaxOutput2').append("<div>"+data+"</div>");
     console.log(data);
     console.log("Im front and got response from the back");
   })

@@ -35,21 +35,16 @@ io.on('connection', function (socket) {
       method: "GET",
       uri: "http://api.microsofttranslator.com/V2/Ajax.svc/Translate",
       qs: {
-          appId: "Bearer" + " " + "http%3a%2f%2fschemas.xmlsoap.org%2fws%2f2005%2f05%2fidentity%2fclaims%2fnameidentifier=9WdP3&http%3a%2f%2fschemas.microsoft.com%2faccesscontrolservice%2f2010%2f07%2fclaims%2fidentityprovider=https%3a%2f%2fdatamarket.accesscontrol.windows.net%2f&Audience=http%3a%2f%2fapi.microsofttranslator.com&ExpiresOn=1462399516&Issuer=https%3a%2f%2fdatamarket.accesscontrol.windows.net%2f&HMACSHA256=g89ax72GfNXOEZ%2blP3Wz7kjxVsiR5jUCT0ywTTfihJY%3d",
+        appId: "Bearer" + " " + "http%3a%2f%2fschemas.xmlsoap.org%2fws%2f2005%2f05%2fidentity%2fclaims%2fnameidentifier=9WdP3&http%3a%2f%2fschemas.microsoft.com%2faccesscontrolservice%2f2010%2f07%2fclaims%2fidentityprovider=https%3a%2f%2fdatamarket.accesscontrol.windows.net%2f&Audience=http%3a%2f%2fapi.microsofttranslator.com&ExpiresOn=1462400339&Issuer=https%3a%2f%2fdatamarket.accesscontrol.windows.net%2f&HMACSHA256=h90VSsVx7eNZLP5QZqm0isGyAs7N9NTpy8319QCkFHg%3d",
         from: "en", //chnage to actual values not jquery backside
         to: "es",
-
-        text: "hello"
+        text: data
       }
-
     })
-    .then(response => console.log(response))
+    // .then(response => console.log(response))
+    .then(response => io.sockets.emit('back2Front',response))
     .catch(err => console.log(err))
-
-
-
-
-    io.sockets.emit('back2Front',data);
+    // io.sockets.emit('back2Front',data);
   });
 
 
