@@ -7,10 +7,10 @@
   <title>Rosetta Chat</title>
 
   <!-- CSS  -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-  <script src="../js/materialize.js" type="text/javascript" charset="utf-8" async defer></script>
+  <link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="../css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="../css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <script src="../js/main.js" type="text/javascript" charset="utf-8" async defer></script>
 
 <script>
   //letting client side js know what our user id is
@@ -26,27 +26,21 @@
 
 <body>
 
-<script>
-  //letting client side js know what our user id is
-  //this makes it vidible to the js running in the web page
-    var userId = '';
-    <$ if (user) { $>
-      userId = '<$= user.id $>';
-    <$ } $>
-  </script>
 
-<!-- Nav bar -->
-  <nav class="cyan accent-4" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Rosetta Chat</a>
+  <nav class="white" role="navigation">
+    <div class="nav-wrapper container">
+      <a id="logo-container" href="#" class="brand-logo center teal-text text-lighten-2">Rosetta Chat</a>
       <ul class="right hide-on-med-and-down">
+      </ul>
+      <ul class="right teal-text">
         <$ if (user) { $>
-          <li><a href="/logout"><i class="material-icons left">trending_flat</i>Logout</a></li>
+          <li><a href="/logout"><i class="material-icons teal-text left">trending_flat</i>Logout</a></li>
           <$ } else { $>
-          <li><a href="/auth/google"><i class="material-icons left">vpn_key</i>Login with Google</a></li>
+          <li><a href="/auth/google"><i class="material-icons teal-text left">vpn_key</i>Login with Google</a></li>
           <$ } $>
       </ul>
 
-      <ul id="nav-mobile" class="side-nav">
+      <ul id="nav-mobile" class="side-nav" style="transform: translateX(-100%);">
         <li><a href="#">Navbar Link</a></li>
       </ul>
       <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
@@ -60,7 +54,7 @@
     <div class="row">
       <div class="col-xs-6" id ="chatsesh1">
         <form id="form1" runat="server">
-          <h1>Rosessta Chat</h1>
+          <h1>Message 1</h1>
           <h2>Input</h2>
           <$ if (user) { $>
             <span>User Name: <$= user.name $></span>
@@ -82,7 +76,7 @@
       </div>
       <div class="col-xs-6" id = "chatsesh2">
         <form id="form2" runat="server">
-          <h1>Rosessta Chat</h1>
+          <h1>Message 2</h1>
           <h2>Input</h2>
           <select id="user2">
             <option value="en">English</option>
