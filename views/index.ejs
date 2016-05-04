@@ -118,10 +118,19 @@
   <script>
   jQuery(function($){
     var socket = io.connect();
+    var token ;
+$(document).ready(function(e){
+  console.log("document loaded");
+    socket.emit('winloaded');
+
+  });
+
   $('#btnAjaxTranslate').click(function(e){
 
     socket.emit('wasClicked', $('#txtAjaxInput').val(), function(data){
-      $chat.append('<span class="error">' + data +"runs line 124 index" +"</span><br/>");
+      // token =data.toString();
+      // console.log(token)
+      // $chat.append('<span class="error">' + token +"runs line 124 index" +"</span><br/>");
     });
 
   });
@@ -129,7 +138,8 @@
         $('#btnAjaxTranslate').click(function (evt) {
         var inputText = $('#txtAjaxInput').val();
         user1txt = $('#txtAjaxInput').val();
-        var token="http%3a%2f%2fschemas.xmlsoap.org%2fws%2f2005%2f05%2fidentity%2fclaims%2fnameidentifier=9WdP3&http%3a%2f%2fschemas.microsoft.com%2faccesscontrolservice%2f2010%2f07%2fclaims%2fidentityprovider=https%3a%2f%2fdatamarket.accesscontrol.windows.net%2f&Audience=http%3a%2f%2fapi.microsofttranslator.com&ExpiresOn=1462389629&Issuer=https%3a%2f%2fdatamarket.accesscontrol.windows.net%2f&HMACSHA256=PHJKotrs%2b%2bEfJ2cHUWBDQHKWbPv%2b3n0183X9DFXbklY%3d";
+        // var token=;
+        console.log(token+ " this is for the trnalation");
         var authToken =token;
         var data = {
           appId: 'Bearer ' + authToken,
@@ -157,6 +167,9 @@
   socket.on('back2Front',function(data){
     console.log(data);
     console.log("Im front and got response from the back");
+  })
+  socket.on('winloaded',function(data){
+    console.log("receied the win load event");
   })
 });
 
