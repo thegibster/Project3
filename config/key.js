@@ -1,21 +1,32 @@
-var request = require("request");
+//var request = require("request");
+var Promise = require("bluebird");
+var Request = Promise.promisify(require('request'));
 var currentToken={};
+
 var options = { method: 'POST',
-  url: 'https://datamarket.accesscontrol.windows.net/v2/OAuth2-13',
-  headers:
-   { 'content-type': 'application/x-www-form-urlencoded',
-     'postman-token': 'afd89d7e-6194-82fb-43b5-05ef6cc66339',
-     'cache-control': 'no-cache' },
-  form:
-   { client_id: '9WdP3',
-     client_secret: 'xLBCiO/4V7Gy5cQ6A+SKbhJ59Jx5E/Nkui6LqILroJQ=',
-     scope: 'http://api.microsofttranslator.com',
-     grant_type: 'client_credentials' } };
+url: 'https://datamarket.accesscontrol.windows.net/v2/OAuth2-13',
+headers:
+{ 'content-type': 'application/x-www-form-urlencoded',
+'postman-token': 'afd89d7e-6194-82fb-43b5-05ef6cc66339',
+'cache-control': 'no-cache' },
+form:
+{ client_id: '9WdP3',
+client_secret: 'xLBCiO/4V7Gy5cQ6A+SKbhJ59Jx5E/Nkui6LqILroJQ=',
+scope: 'http://api.microsofttranslator.com',
+grant_type: 'client_credentials' }
+};
 
-request(options, function (error, response, body) {
+Request(options, function (error, response, body) {
   if (error) throw new Error(error);
+  console.log("inside the promise");
+  return  currentToken.accessToken= body.split(",")[1].toString().split(":")[1];
+  // console.log(body);
+  //get the string key from the call as it is a string in return body
+  // console.log(body.split(",")[1].toString().split(":")[1]);
+  // currentToken.accessToken;
+  console.log(currentToken.accessToken);
+  console.log("after all");
 
-  currentToken.accessToken= body.access_token;
 });
 
 module.exports= currentToken;
