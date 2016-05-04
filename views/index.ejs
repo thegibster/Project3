@@ -65,9 +65,9 @@
           <$ } $>
 
 
-          <select id="user1">
-            <option value="en">English</option>
-            <option value="es">Spanish</option>
+          <select id="user" style ="display:inline;">
+            <option value="es">English</option>
+            <option value="en">Spanish</option>
           </select>
           <div>
             <input type="text" id="txtAjaxInput" value="you" />
@@ -78,7 +78,6 @@
         </form>
         <span id="txtAjaxOutput"> <!-- test me 1 --></span>
       </div>
-
     </div>
   </div>
  <script>
@@ -110,7 +109,9 @@ $(document).ready(function(e){
 
   $('#btnAjaxTranslate').click(function(e){
     var pleaseTranslateMe = $('#txtAjaxInput').val();
-    socket.emit('wasClicked', pleaseTranslateMe, function(data){
+    var userLang = $("#user").val();
+    var passTranLang={toTrans: pleaseTranslateMe, lang:userLang};
+    socket.emit('wasClicked', passTranLang, function(data){
       console.log(data + " was clicked was run heere ");
       // token =data.toString();
       // console.log(token)
@@ -119,40 +120,12 @@ $(document).ready(function(e){
 
   });
 
-      //   $('#btnAjaxTranslate').click(function (evt) {
-      //   var inputText = $('#txtAjaxInput').val();
-      //   user1txt = $('#txtAjaxInput').val();
-      //   // var token=;
-      //   console.log(token+ " this is for the trnalation");
-      //   var authToken =token;
-      //   var data = {
-      //     appId: 'Bearer ' + authToken,
-      //     from: $("#user1").val(),
-      //     to: $("#user2").val(),
-      //     contentType: 'text/plain',
-      //     text: inputText
-      //   };
-      //   $.ajax({
-      //     url: "http://api.microsofttranslator.com/V2/Ajax.svc/Translate",
-      //     dataType: 'jsonp',
-      //     data: data,
-      //     jsonp: 'oncomplete'
-      //   })
-      //   .done(function (jqXHR, textStatus, errorThrown) {
-      //     console.log('done', this, jqXHR, textStatus, errorThrown);
-      //     console.log(jqXHR);
-      //     $('#txtAjaxOutput').append($('#txtAjaxInput').val()+'<br>');
-      //     $('#txtAjaxOutput2').append("<div>"+(jqXHR)+"</div>");
-      //   })
-      //   .fail(function (jqXHR, textStatus, errorThrown) {
-      //     console.log('fail', this, jqXHR, textStatus, errorThrown);
-      //   });
-      // });
+
   socket.on('back2Front',function(data){
-    $('#txtAjaxOutput1').append("<div>"+data+"</div>");
+    $('#txtAjaxOutput').append("<div>"+data+"</div>");
     console.log(data);
     console.log("Im front and got response from the back");
-  })
+  });
   socket.on('winloaded',function(data){
     console.log("receied the win load event");
   })
