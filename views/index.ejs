@@ -78,24 +78,7 @@
         </form>
         <span id="txtAjaxOutput"> <!-- test me 1 --></span>
       </div>
-      <div class="col-xs-6" id = "chatsesh2">
-        <form id="form2" runat="server">
-          <h1>Rosessta Chat</h1>
-          <h2>Input</h2>
-          <select id="user2" style="display:inline;">
-            <option value="en">English</option>
-            <option value="es">Spanish</option>
-          </select>
 
-          <div>
-          <input type="text" id="txtAjaxInput2" value="you" />
-            <input type="button" id="btnAjaxTranslate2" value="Send" />
-          </div>
-          <h2>Output 2</h2>
-
-        </form>
-        <span id="txtAjaxOutput2"> <!-- testme 2 --></span>
-      </div>
     </div>
   </div>
  <script>
@@ -166,7 +149,7 @@ $(document).ready(function(e){
       //   });
       // });
   socket.on('back2Front',function(data){
-    $('#txtAjaxOutput2').append("<div>"+data+"</div>");
+    $('#txtAjaxOutput1').append("<div>"+data+"</div>");
     console.log(data);
     console.log("Im front and got response from the back");
   })
