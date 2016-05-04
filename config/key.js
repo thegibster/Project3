@@ -1,7 +1,7 @@
-//var request = require("request");
-var Promise = require("bluebird");
-var Request = Promise.promisify(require('request'));
-var currentToken={};
+var request = require("request-promise");
+// var Promise = require("bluebird");
+// var Request = Promise.promisify(require('request'));
+// var currentToken={};
 
 var options = { method: 'POST',
 url: 'https://datamarket.accesscontrol.windows.net/v2/OAuth2-13',
@@ -16,17 +16,17 @@ scope: 'http://api.microsofttranslator.com',
 grant_type: 'client_credentials' }
 };
 
-Request(options, function (error, response, body) {
-  if (error) throw new Error(error);
-  console.log("inside the promise");
-  return  currentToken.accessToken= body.split(",")[1].toString().split(":")[1];
+// request(options, function (error, response, body) {
+  // if (error) throw new Error(error);
+  // console.log("inside the promise");
+  // return  currentToken.accessToken= body.split(",")[1].toString().split(":")[1];
   // console.log(body);
   //get the string key from the call as it is a string in return body
   // console.log(body.split(",")[1].toString().split(":")[1]);
   // currentToken.accessToken;
-  console.log(currentToken.accessToken);
-  console.log("after all");
+  // console.log(currentToken.accessToken);
+  // console.log("after all");
 
-});
+// });
 
-module.exports= currentToken;
+module.exports= request(options);
