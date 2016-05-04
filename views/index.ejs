@@ -7,11 +7,17 @@
   <title>Rosetta Chat</title>
 
   <!-- CSS  -->
+<<<<<<< HEAD
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+=======
   <link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="../css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="../css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <script src="../js/main.js" type="text/javascript" charset="utf-8" async defer></script>
 
+>>>>>>> master
 <script>
   //letting client side js know what our user id is
   //this makes it vidible to the js running in the web page
@@ -78,7 +84,7 @@
         <form id="form2" runat="server">
           <h1>Message 2</h1>
           <h2>Input</h2>
-          <select id="user2">
+          <select id="user2" style="display:inline;">
             <option value="en">English</option>
             <option value="es">Spanish</option>
           </select>
@@ -102,12 +108,62 @@
   </script>
 
   <!--  Scripts-->
-  <script src="https://code.jquery.com/jquery-2.1.1.min.js"
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js">
   <script src="js/materialize.js"></script>
-  <script src="js/init.js"></script>
+
+  <script src="../js/materialize.js" type="text/javascript" charset="utf-8" async defer></script>
+
   <script src="/socket.io/socket.io.js"></script>
-  <script src="runKey.js"></script>
-  <script src="/javascripts/server.js" type="text/javascript" ></script>
+
+
+
+  <script>
+  jQuery(function($){
+    var socket = io.connect();
+  $('#btnAjaxTranslate').click(function(e){
+
+    socket.emit('wasClicked', $('#txtAjaxInput').val(), function(data){
+      $chat.append('<span class="error">' + data +"runs line 124 index" +"</span><br/>");
+    });
+
+  });
+
+        $('#btnAjaxTranslate').click(function (evt) {
+        var inputText = $('#txtAjaxInput').val();
+        user1txt = $('#txtAjaxInput').val();
+        var token="http%3a%2f%2fschemas.xmlsoap.org%2fws%2f2005%2f05%2fidentity%2fclaims%2fnameidentifier=9WdP3&http%3a%2f%2fschemas.microsoft.com%2faccesscontrolservice%2f2010%2f07%2fclaims%2fidentityprovider=https%3a%2f%2fdatamarket.accesscontrol.windows.net%2f&Audience=http%3a%2f%2fapi.microsofttranslator.com&ExpiresOn=1462389629&Issuer=https%3a%2f%2fdatamarket.accesscontrol.windows.net%2f&HMACSHA256=PHJKotrs%2b%2bEfJ2cHUWBDQHKWbPv%2b3n0183X9DFXbklY%3d";
+        var authToken =token;
+        var data = {
+          appId: 'Bearer ' + authToken,
+          from: $("#user1").val(),
+          to: $("#user2").val(),
+          contentType: 'text/plain',
+          text: inputText
+        };
+        $.ajax({
+          url: "http://api.microsofttranslator.com/V2/Ajax.svc/Translate",
+          dataType: 'jsonp',
+          data: data,
+          jsonp: 'oncomplete'
+        })
+        .done(function (jqXHR, textStatus, errorThrown) {
+          console.log('done', this, jqXHR, textStatus, errorThrown);
+          console.log(jqXHR);
+          $('#txtAjaxOutput').append($('#txtAjaxInput').val()+'<br>');
+          $('#txtAjaxOutput2').append("<div>"+(jqXHR)+"</div>");
+        })
+        .fail(function (jqXHR, textStatus, errorThrown) {
+          console.log('fail', this, jqXHR, textStatus, errorThrown);
+        });
+      });
+  socket.on('back2Front',function(data){
+    console.log(data);
+    console.log("Im front and got response from the back");
+  })
+});
+
+
+  </script>
 </body>
 </html>
 
