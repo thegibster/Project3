@@ -6,7 +6,7 @@
   <title>Rosetta Chat</title>
 
   <!-- CSS  -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="../css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="../css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <script src="../js/main.js" type="text/javascript" charset="utf-8" async defer></script>
@@ -41,26 +41,50 @@
     </div>
   </nav>
 
-<div id="index-banner" class="parallax-container">
-    <div class="section no-pad-bot">
-      <div class="container">
-        <br><br>
-        <br><br>
 
-      </div>
-    </div>
-    <div class="parallax"><img src="http://static.techspot.com/articles-info/776/images/messaging-clients-comparison.jpg" alt="Unsplashed background img 1" style="display: block; transform: translate3d(-50%, 62px, 0px);"></div>
+  <div class="slider">
+    <ul class="slides">
+      <li>
+        <img src="http://static.techspot.com/articles-info/776/images/messaging-clients-comparison.jpg">
+        <div class="caption center-align">
+          <h3></h3>
+
+        </div>
+      </li>
+      <li>
+        <img src="http://i.imgur.com/Lg2rKuY.png">
+        <div class="caption left-align">
+          <h3></h3>
+          <h5 class="light teal-text text-lighten-3">Choose from select languages.</h5>
+        </div>
+      </li>
+      <li>
+        <img src="http://i.imgur.com/851saEv.jpg">
+        <div class="caption teal-text center-align">
+          <h3>Message Internationally!</h3>
+          <h5 class="light red-text text-lighten-3">Get in contact with family and friends around the world.</h5>
+        </div>
+      </li>
+      <li>
+        <img src="http://i.imgur.com/MXu59yY.jpg" >
+        <div class="caption right-align">
+          <h3>Get The Mobile App!</h3>
+          <h5 class="light grey-text text-lighten-3">Coming Soon</h5>
+        </div>
+      </li>
+    </ul>
   </div>
+
 
   <div class="section no-pad-bot">
       <div class="container">
         <br><br>
 
         <div class="row center">
-          <h5 class="header col s12 light">A innovative messaging app...</h5>
+          <h5 class="header col s12 light">Don’t let language barriers hold you back. Rosetta Chat is an innovative messaging app...</h5>
         </div>
         <div class="row center">
-          <a href="" class="btn-large waves-effect waves-light teal lighten-1">Get Started</a>
+          <a href="" class="btn-large waves-effect waves-light teal lighten-1">Get The App</a>
         </div>
         <br><br>
 
@@ -73,7 +97,7 @@
       <div class="row">
         <div class="col l6 s12">
           <h5 class="white-text">Company Bio</h5>
-          <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job.</p>
+          <p class="grey-text text-lighten-4">We are a team of young web developers working on this project like it's our full time job.</p>
         </div>
       </div>
     </div>
@@ -95,6 +119,20 @@
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="js/materialize.js"></script>
   <script src="js/init.js"></script>
-
+<script>
+ $(document).ready(function(){
+      $('.slider').slider({full_width: true});
+    });
+</script>
+  <script>
+// Pause slider
+$('.slider').slider('pause');
+// Start slider
+$('.slider').slider('start');
+// Next slide
+$('.slider').slider('next');
+// Previous slide
+$('.slider').slider('prev');
+</script>
 </body>
 </html>
