@@ -142,7 +142,7 @@ $(document).ready(function(e){
 });
 
   socket.on('back2Front',function(data){
-    console.log(data);
+    console.log(data + " This should be data");
     //   socket.emit('sent message',data, function(data){
 
     // });
@@ -158,8 +158,17 @@ $(document).ready(function(e){
     // }else{
     //   $('#txtAjaxOutput').append("<div>"+data.userID+": " +data.response +"</div>");
     // }
-    $('#txtAjaxOutput').append("<div>"+data.userID+": "+data.original+"</div>");
-    $('#txtAjaxOutput').append("<div>"+data.userID+": " +data.response +"</div>");
+    data.forEach(runThroughData);
+    $('#txtAjaxOutput').append("<div><br></div>");
+    function runThroughData(item, index){
+       console.log(item.userID + " This is an item");
+      $('#txtAjaxOutput').append("<div>"+item.userID+": "+item.response+"</div>");
+    }
+    // $('#txtAjaxOutput').append("<div>"+data.userID+": "+data.original+"</div>");
+    // $('#txtAjaxOutput').append("<div>"+data.userID+": " +data.response +"</div>");
+    // $('#txtAjaxOutput').append("<div>"+data.userID+": "+data.original+"</div>");
+    // $('#txtAjaxOutput').append("<div>"+data.userID+": " +data.response +"</div>");
+
      console.log(data);
     // $('#txtAjaxOutput').append("<div>"+data[0]+"</div>");
     // console.log(data);

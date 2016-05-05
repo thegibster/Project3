@@ -5,6 +5,7 @@ rp = require('request-promise')
 var key = require('./config/key')
 var Chat = require('./models/chat');
 var bacon;
+ var totalTranslations =[];
 // var currentToken ;
 // console.log(currentToken)
 function runToken(){
@@ -39,7 +40,7 @@ io.on('connection', function (socket) {
 
     socket.originalLanguage = data.lang;
     console.log(socket.originalLanguage);
-    var totalTranslations =[];
+
 
     rp({
       method: "GET",
@@ -110,9 +111,10 @@ io.on('connection', function (socket) {
     }
 
     ))
-    .then(
+    .then(function(response) {
+      console.log(totalTranslations);
       io.sockets.emit('back2Front', totalTranslations)
-      )
+      })
     .catch(err => console.log(err))
     // io.sockets.emit('back2Front',data);
   });
