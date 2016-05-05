@@ -53,7 +53,11 @@
     <div class="row">
       <div class="col-xs-6" id ="chatsesh1">
         <form id="form1" runat="server">
+
           <h1>Chat Room </h1>
+
+          <h1>Message 1</h1>
+
           <h2>Input</h2>
           <$ if (user) { $>
             <span>User Name: <$= user.name $></span>
@@ -120,21 +124,24 @@ $(document).ready(function(e){
       // $chat.append('<span class="error">' + token +"runs line 124 index" +"</span><br/>");
     });
 
-  });
-
+});
 
   socket.on('back2Front',function(data){
+      socket.emit('sent message',data, function(data){
 
+    });
     // console.log(data.sockLang );
     if(data.sockLang === "es" ){
       console.log(userName);
       console.log(data.userID + "bacone id");
+
       console.log("i ran");
       console.log(data.original);
        $('#txtAjaxOutput').append("<div>"+data.userID+": "+data.original+"</div>");
     }else{
       $('#txtAjaxOutput').append("<div>"+data.userID+": " +data.response +"</div>");
     }
+
      console.log(data);
     // $('#txtAjaxOutput').append("<div>"+data[0]+"</div>");
     // console.log(data);
