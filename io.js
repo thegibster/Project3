@@ -34,7 +34,6 @@ io.on('connection', function (socket) {
 
 
 
-
   socket.on('wasClicked', function(data){
     console.log("the button was clicked on the front")
 
