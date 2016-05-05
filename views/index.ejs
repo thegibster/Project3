@@ -6,16 +6,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
   <title>Rosetta Chat</title>
 
-  <!-- CSS  -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="../css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="../css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+
 <script>
   //letting client side js know what our user id is
   //this makes it vidible to the js running in the web page
     var userId = '';
+    var usermame='';
     <$ if (user) { $>
       userId = '<$= user.id $>';
+     username= '<$= user.name $>';
     <$ } $>
 </script>
 
@@ -23,27 +25,21 @@
 
 <body>
 
-<script>
-  //letting client side js know what our user id is
-  //this makes it vidible to the js running in the web page
-    var userId = '';
-    <$ if (user) { $>
-      userId = '<$= user.id $>';
-    <$ } $>
-  </script>
 
-<!-- Nav bar -->
-  <nav class="cyan accent-4" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Rosetta Chat</a>
+  <nav class="white" role="navigation">
+    <div class="nav-wrapper container">
+      <a id="logo-container" href="#" class="brand-logo center teal-text text-lighten-2">Rosetta Chat</a>
       <ul class="right hide-on-med-and-down">
+      </ul>
+      <ul class="right teal-text">
         <$ if (user) { $>
-          <li><a href="/logout"><i class="material-icons left">trending_flat</i>Logout</a></li>
+          <li><a href="/logout"><i class="material-icons teal-text left">trending_flat</i>Logout</a></li>
           <$ } else { $>
-          <li><a href="/auth/google"><i class="material-icons left">vpn_key</i>Login with Google</a></li>
+          <li><a href="/auth/google"><i class="material-icons teal-text left">vpn_key</i>Login with Google</a></li>
           <$ } $>
       </ul>
 
-      <ul id="nav-mobile" class="side-nav">
+      <ul id="nav-mobile" class="side-nav" style="transform: translateX(-100%);">
         <li><a href="#">Navbar Link</a></li>
       </ul>
       <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
@@ -57,7 +53,7 @@
     <div class="row">
       <div class="col-xs-6" id ="chatsesh1">
         <form id="form1" runat="server">
-          <h1>Rosessta Chat</h1>
+          <h1>Message 1</h1>
           <h2>Input</h2>
           <$ if (user) { $>
             <span>User Name: <$= user.name $></span>
@@ -65,8 +61,8 @@
 
 
           <select id="user" style ="display:inline;">
-            <option value="es">English</option>
-            <option value="en">Spanish</option>
+            <option value="en">English</option>
+            <option value="es">Spanish</option>
           </select>
           <div>
             <input type="text" id="txtAjaxInput" value="you" />
@@ -77,12 +73,14 @@
         </form>
         <span id="txtAjaxOutput"> <!-- test me 1 --></span>
       </div>
+
+
     </div>
   </div>
  <script>
     var userId = '';
     <$ if (user) { $>
-      userId = '<$= user.id $>';
+      userId = '<$= user.name $>';
     <$ } $>
   </script>
 
@@ -110,7 +108,7 @@ $(document).ready(function(e){
     var pleaseTranslateMe = $('#txtAjaxInput').val();
     var userLang = $("#user").val();
     var otherLang = userLang == "en" ? "es" : "en";
-    var passTranLang={toTrans: pleaseTranslateMe, lang:userLang, lang2:otherLang};
+    var passTranLang={toTrans: pleaseTranslateMe, lang:userLang, lang2:otherLang,userID:userId,uname:user.name};
     socket.emit('wasClicked', passTranLang, function(data){
       console.log(data + " was clicked was run heere ");
       // token =data.toString();
@@ -122,15 +120,17 @@ $(document).ready(function(e){
 
 
   socket.on('back2Front',function(data){
+
     // console.log(data.sockLang );
     if(data.sockLang === "es" ){
+      console.log(userName);
+      console.log(data.userID + "bacone id");
       console.log("i ran");
       console.log(data.original);
-       $('#txtAjaxOutput').append("<div>"+data.original+"</div>");
+       $('#txtAjaxOutput').append("<div>"+data.userID+": "+data.original+"</div>");
     }else{
-      $('#txtAjaxOutput').append("<div>"+data.response+"</div>");
+      $('#txtAjaxOutput').append("<div>"+data.userID+": " +data.response +"</div>");
     }
-    console.log()
      console.log(data);
     // $('#txtAjaxOutput').append("<div>"+data[0]+"</div>");
     // console.log(data);
@@ -140,6 +140,7 @@ $(document).ready(function(e){
     console.log("receied the win load event");
   })
 });
+
 
 
   </script>
