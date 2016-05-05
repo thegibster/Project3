@@ -42,8 +42,8 @@ io.on('connection', function (socket) {
       uri: "http://api.microsofttranslator.com/V2/Ajax.svc/Translate",
       qs: {
         appId: "Bearer" + " " + bacon,
-        from: "en", //chnage to actual values not jquery backside
-        to: "es",
+        from: data.lang, //chnage to actual values not jquery backside
+        to: data.lang2,
         text: data.toTrans
       }
     })
