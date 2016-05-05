@@ -6,18 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
   <title>Rosetta Chat</title>
 
-  <!-- CSS  -->
-<<<<<<< HEAD
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-=======
   <link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="../css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="../css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-  <script src="../js/main.js" type="text/javascript" charset="utf-8" async defer></script>
 
->>>>>>> master
 <script>
   //letting client side js know what our user id is
   //this makes it vidible to the js running in the web page
@@ -79,30 +71,8 @@
         </form>
         <span id="txtAjaxOutput"> <!-- test me 1 --></span>
       </div>
-<<<<<<< HEAD
-<<<<<<< HEAD
-      <div class="col-xs-6" id = "chatsesh2">
-        <form id="form2" runat="server">
-          <h1>Message 2</h1>
-          <h2>Input</h2>
-          <select id="user2" style="display:inline;">
-            <option value="en">English</option>
-            <option value="es">Spanish</option>
-          </select>
 
-          <div>
-          <input type="text" id="txtAjaxInput2" value="you" />
-            <input type="button" id="btnAjaxTranslate2" value="Send" />
-          </div>
-          <h2>Output 2</h2>
 
-        </form>
-        <span id="txtAjaxOutput2"> <!-- testme 2 --></span>
-      </div>
-=======
->>>>>>> cd29fc18a220ab3241d69b590dc7b5a27eda5169
-=======
->>>>>>> 30a74a49c34eb73e8abeca8a6c2c5bfe216c85c3
     </div>
   </div>
  <script>
@@ -148,23 +118,16 @@ $(document).ready(function(e){
 
 
   socket.on('back2Front',function(data){
-<<<<<<< HEAD
-    console.log(socket);
-    if(data.dl === "es" ){
-=======
+
     // console.log(data.sockLang );
     if(data.sockLang === "es" ){
->>>>>>> 30a74a49c34eb73e8abeca8a6c2c5bfe216c85c3
+
       console.log("i ran");
       console.log(data.original);
        $('#txtAjaxOutput').append("<div>"+data.original+"</div>");
     }else{
       $('#txtAjaxOutput').append("<div>"+data.response+"</div>");
     }
-<<<<<<< HEAD
-=======
-    console.log()
->>>>>>> 30a74a49c34eb73e8abeca8a6c2c5bfe216c85c3
      console.log(data);
     // $('#txtAjaxOutput').append("<div>"+data[0]+"</div>");
     // console.log(data);
