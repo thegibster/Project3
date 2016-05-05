@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>Rosetta Chat</title>
+
+  <link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="../css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="../css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+
+<script>
+  //letting client side js know what our user id is
+  //this makes it vidible to the js running in the web page
+    var userId = '';
+    var usermame='';
+    <$ if (user) { $>
+      userId = '<$= user.id $>';
+     username= '<$= user.name $>';
+    <$ } $>
+</script>
+
+</head>
+
+<body>
+
+
+  <nav class="white" role="navigation">
+    <div class="nav-wrapper container">
+      <a id="logo-container" href="#" class="brand-logo center teal-text text-lighten-2">Rosetta Chat</a>
+      <ul class="right hide-on-med-and-down">
+      </ul>
+      <ul class="right teal-text">
+        <$ if (user) { $>
+          <li><a href="/logout"><i class="material-icons teal-text left">trending_flat</i>Logout</a></li>
+          <$ } else { $>
+          <li><a href="/auth/google"><i class="material-icons teal-text left">vpn_key</i>Login with Google</a></li>
+          <$ } $>
+      </ul>
+
+      <ul id="nav-mobile" class="side-nav" style="transform: translateX(-100%);">
+        <li><a href="#">Navbar Link</a></li>
+      </ul>
+      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+
+
+
+<div class="chatbox">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-6" id ="chatsesh1">
+        <form id="form1" runat="server">
+
+          <h1>Chat Room </h1>
+
+          <h1>Message 1</h1>
+
+          <h2>Input</h2>
+          <$ if (user) { $>
+            <span>User Name: <$= user.name $></span>
+          <$ } $>
+
+
+          <select id="user" style ="display:inline;">
+            <option value="en">English</option>
+            <option value="es">Spanish</option>
+          </select>
+           <div>
+
+
+        </div>
+          <h2>Output 1</h2>
+
+        </form>
+        <span id="txtAjaxOutput"> <!-- test me 1 --></span>
+          <textarea type="text" id="txtAjaxInput" placeholder="Send a message" rows="3"></textarea>
+          <input type="button" class="btn waves-effect waves-teal" id="btnAjaxTranslate" value="Send" />
+
+      </div>
+
+
+    </div>
+  </div>
+  </div>
+ <script>
+    var userId = '';
+    <$ if (user) { $>
+      userId = '<$= user.name $>';
+    <$ } $>
+  </script>
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js">
+  <script src="js/materialize.js"></script>
+
+  <script src="../js/materialize.js" type="text/javascript" charset="utf-8" async defer></script>
+
+  <script src="/socket.io/socket.io.js"></script>
+
+
+
+  <script>
+  jQuery(function($){
+    var socket = io.connect();
+    var token ;
+$(document).ready(function(e){
+  console.log("document loaded");
+    socket.emit('winloaded');
+
+  });
+
+  $('#btnAjaxTranslate').click(function(e){
+    var pleaseTranslateMe = $('#txtAjaxInput').val();
+    var userLang = $("#user").val();
+    var otherLang = userLang == "en" ? "es" : "en";
+    var passTranLang={toTrans: pleaseTranslateMe, lang:userLang, lang2:otherLang,userID:userId,uname:user.name};
+    socket.emit('wasClicked', passTranLang, function(data){
+      console.log(data + " was clicked was run heere ");
+      // token =data.toString();
+      // console.log(token)
+      // $chat.append('<span class="error">' + token +"runs line 124 index" +"</span><br/>");
+    });
+
+});
+
+  socket.on('back2Front',function(data){
+      socket.emit('sent message',data, function(data){
+
+    });
+    // console.log(data.sockLang );
+    if(data.sockLang === "es" ){
+      console.log(userName);
+      console.log(data.userID + "bacone id");
+
+      console.log("i ran");
+      console.log(data.original);
+       $('#txtAjaxOutput').append("<div>"+data.userID+": "+data.original+"</div>");
+    }else{
+      $('#txtAjaxOutput').append("<div>"+data.userID+": " +data.response +"</div>");
+    }
+
+     console.log(data);
+    // $('#txtAjaxOutput').append("<div>"+data[0]+"</div>");
+    // console.log(data);
+    console.log("Im front and got response from the back");
+  });
+  socket.on('winloaded',function(data){
+    console.log("receied the win load event");
+  })
+});
+
+
+
+  </script>
+</body>
+</html>
