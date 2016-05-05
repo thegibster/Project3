@@ -131,8 +131,8 @@ $(document).ready(function(e){
         default:
             otherLang =["en","es","fr","it"];
     }
-    var passTranLang={toTrans: pleaseTranslateMe, lang:userLang, lang2:otherLang[0],lang3:otherLang[1],
-      lang4:otherLang[2],userID:userId,uname:user.name};
+    var passTranLang={toTrans: pleaseTranslateMe, lang:userLang, lang2:otherLang[1],lang3:otherLang[2],
+      lang4:otherLang[3],userID:userId,uname:user.name};
     socket.emit('wasClicked', passTranLang, function(data){
       console.log(data + " was clicked was run heere ");
       // token =data.toString();
