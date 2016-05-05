@@ -39,11 +39,13 @@ io.on('connection', function (socket) {
     socket.originalLanguage = data.lang;
     console.log(socket.originalLanguage);
 
+
     rp({
       method: "GET",
       uri: "http://api.microsofttranslator.com/V2/Ajax.svc/Translate",
       qs: {
         appId: "Bearer" + " " + bacon,
+
 
         from: "en", //chnage to actual values not jquery backside
         to: "es",
@@ -61,7 +63,6 @@ io.on('connection', function (socket) {
     .catch(err => console.log(err))
     // io.sockets.emit('back2Front',data);
   });
-
 
   //Emit the rooms array
   socket.emit('setup', {
