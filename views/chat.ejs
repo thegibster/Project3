@@ -46,19 +46,56 @@
     </div>
   </nav>
 
+<!-- <div class="chatbox">
+  <div class="row">
+    <div class="col s3" id="side-nav">Nav Bar</div>
+    <div class="col s9" id="chatsesh1">
+      <div id="input-box">
+          <div class="header">
+          <h1>Chat Room </h1>
+          </div>
+          <form id="form1" runat="server">
+
+
+          <h2>Input</h2>
+          <$ if (user) { $>
+            <span>User Name: <$= user.name $></span>
+          <$ } $>
+
+
+          <select id="user" style ="display:inline;">
+            <option value="en">English</option>
+            <option value="es">Spanish</option>
+          </select>
+
+          <h2>Output 1</h2>
+
+          </form>
+
+          <div id="txtAjaxOutput">
+
+
+        <div id="input-box">
+          <textarea type="text" id="txtAjaxInput" placeholder="Send a message" rows="3"></textarea>
+          <input type="button" class="btn waves-effect waves-teal" id="btnAjaxTranslate" value="Send" />
+      </div>
+    </div>
+  </div>
+</div> -->
+
 
 
 <div class="chatbox">
-  <div class="container">
     <div class="row">
-      <div class="col-xs-6" id ="chatsesh1">
+      <div class="col s3" id="side-div">Test Div</div>
+      <div class="col s9" id ="chatsesh1">
+      <div class="header">
+          <h1>Chat Room </h1>
+          </div>
         <form id="form1" runat="server">
 
-          <h1>Chat Room </h1>
 
-          <h1>Message 1</h1>
 
-          <h2>Input</h2>
           <$ if (user) { $>
             <span>User Name: <$= user.name $></span>
           <$ } $>
@@ -75,15 +112,17 @@
           <h2>Output 1</h2>
 
         </form>
-        <span id="txtAjaxOutput"> <!-- test me 1 --></span>
+       <div class="bubble">
+        <span id="txtAjaxOutput" style="color: white"> <!-- test me 1 --></span>
+        </div>
+        <div id="input-box">
           <textarea type="text" id="txtAjaxInput" placeholder="Send a message" rows="3"></textarea>
           <input type="button" class="btn waves-effect waves-teal" id="btnAjaxTranslate" value="Send" />
-
+        </div>
       </div>
 
 
     </div>
-  </div>
   </div>
  <script>
     var userId = '';
