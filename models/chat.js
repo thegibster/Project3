@@ -9,7 +9,6 @@ var chatSchema = new mongoose.Schema({
   user_name: String,
   created: { type: Date, default: Date.now }
 });
-
 var Chat = mongoose.model('Chat', chatSchema);
 
 module.exports = Chat;
