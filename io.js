@@ -87,7 +87,6 @@ io.on('connection', function (socket) {
     io.in(data.newRoom).emit('user joined', data);
 
   });
-
     socket.on('new message', function(data) {
     //Create message
     var newMsg = new Chat({
