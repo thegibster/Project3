@@ -110,7 +110,8 @@ $(document).ready(function(e){
   $('#btnAjaxTranslate').click(function(e){
     var pleaseTranslateMe = $('#txtAjaxInput').val();
     var userLang = $("#user").val();
-    var passTranLang={toTrans: pleaseTranslateMe, lang:userLang};
+    var otherLang = userLang == "en" ? "es" : "en";
+    var passTranLang={toTrans: pleaseTranslateMe, lang:userLang, lang2:otherLang};
     socket.emit('wasClicked', passTranLang, function(data){
       console.log(data + " was clicked was run heere ");
       // token =data.toString();
@@ -122,8 +123,17 @@ $(document).ready(function(e){
 
 
   socket.on('back2Front',function(data){
-    $('#txtAjaxOutput').append("<div>"+data+"</div>");
-    console.log(data);
+    console.log(socket);
+    if(data.dl === "es" ){
+      console.log("i ran");
+      console.log(data.original);
+       $('#txtAjaxOutput').append("<div>"+data.original+"</div>");
+    }else{
+      $('#txtAjaxOutput').append("<div>"+data.response+"</div>");
+    }
+     console.log(data);
+    // $('#txtAjaxOutput').append("<div>"+data[0]+"</div>");
+    // console.log(data);
     console.log("Im front and got response from the back");
   });
   socket.on('winloaded',function(data){

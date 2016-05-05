@@ -6,13 +6,19 @@ var key = require('./config/key')
 var bacon;
 // var currentToken ;
 // console.log(currentToken)
-key.new().then((token) => bacon = (JSON.parse(token).access_token))
+function runToken(){
+  key.new().then((token) => bacon = (JSON.parse(token).access_token))
 // key.then((token) => console.log(token))
 // console.log("after promise");
 setTimeout(function(){console.log(bacon)},1000);
+};
+// key.new().then((token) => bacon = (JSON.parse(token).access_token))
+// // key.then((token) => console.log(token))
+// // console.log("after promise");
+// setTimeout(function(){console.log(bacon)},1000);
 // console.log(bacon + "dammmm gurl");
 io.on('connection', function (socket) {
-
+  runToken();
   console.log('Client connected to socket.io!');
   console.log("server side");
   // console.log(currentToken);
@@ -38,11 +44,11 @@ io.on('connection', function (socket) {
         appId: "Bearer" + " " + bacon,
         from: "en", //chnage to actual values not jquery backside
         to: "es",
-        text: data
+        text: data.toTrans
       }
     })
     // .then(response => console.log(response))
-    .then(response => io.sockets.emit('back2Front',response))
+    .then(response => io.sockets.emit('back2Front',{response:response,original: data.toTrans,dl:data.lang,dl2:data.lang2}))
     .catch(err => console.log(err))
     // io.sockets.emit('back2Front',data);
   });
