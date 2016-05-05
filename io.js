@@ -66,7 +66,7 @@ io.on('connection', function (socket) {
           from: data.lang, //chnage to actual values not jquery backside
           to: data.lang2,
           text: data.toTrans
-        }
+        }//smile
       })
     })
     // .then(response => console.log(response))
