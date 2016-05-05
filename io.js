@@ -3,6 +3,7 @@ var io = require('socket.io')();
 var request = require('request');
 rp = require('request-promise')
 var key = require('./config/key')
+var Chat = require('./models/chat');
 var bacon;
 // var currentToken ;
 // console.log(currentToken)
@@ -58,7 +59,7 @@ io.on('connection', function (socket) {
     })
     // .then(response => console.log(response))
 
-    .then(response => io.sockets.emit('back2Front',{response:response,original: data.toTrans,dl:data.lang,dl2:data.lang2,userID:data.userID,uname:data.uname}))
+    .then(response => io.sockets.emit('back2Front',{response:response,original: data.toTrans,dl:data.lang,dl2:data.lang2,userID:data.userID}))
 
     .catch(err => console.log(err))
     // io.sockets.emit('back2Front',data);
@@ -87,18 +88,28 @@ io.on('connection', function (socket) {
     io.in(data.newRoom).emit('user joined', data);
 
   });
-    socket.on('new message', function(data) {
+    socket.on('sent message', function(data) {
+      console.log("i heard sent message broadcast");
+      console.log(data);
     //Create message
     var newMsg = new Chat({
-      username: data.username,
-      content: data.message,
-      room: data.room.toLowerCase(),
-      created: new Date()
+      original_message: data.original,
+      original_language: data.dl,
+      translated_message: data.response,
+      translated_language: data.dl2,
+      user_name: data.userID
+
+      // room: data.room.toLowerCase(), //this is for when we adding the rooms part
     });
     //Save it to database
     newMsg.save(function(err, msg){
       //Send message to those connected in the room
-      io.in(msg.room).emit('message created', msg);
+      if(err) {
+        console.log("error: ", err );
+      } else {
+        console.log("saved", msg);
+      }
+      // io.in(msg.room).emit('message created', msg);
     });
   });
 //   socket.on('add-circle', function(data){

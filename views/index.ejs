@@ -6,25 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
   <title>Rosetta Chat</title>
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-  <!-- CSS  -->
-
-=======
->>>>>>> 2929990e972db4e54d77dc2f0e565545379c50a0
-=======
->>>>>>> latenight9clockp3
   <link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="../css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="../css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
->>>>>>> 2929990e972db4e54d77dc2f0e565545379c50a0
-=======
->>>>>>> latenight9clockp3
 <script>
   //letting client side js know what our user id is
   //this makes it vidible to the js running in the web page
@@ -68,11 +53,11 @@
     <div class="row">
       <div class="col-xs-6" id ="chatsesh1">
         <form id="form1" runat="server">
-<<<<<<< HEAD
+
           <h1>Chat Room </h1>
-=======
+
           <h1>Message 1</h1>
->>>>>>> latenight9clockp3
+
           <h2>Input</h2>
           <$ if (user) { $>
             <span>User Name: <$= user.name $></span>
@@ -95,37 +80,8 @@
           <input type="button" class="btn waves-effect waves-teal" id="btnAjaxTranslate" value="Send" />
 
       </div>
-<<<<<<< HEAD
-<<<<<<< HEAD
-      <div class="col-xs-6" id = "chatsesh2">
-        <form id="form2" runat="server">
-          <h1>Message 2</h1>
-          <h2>Input</h2>
-          <select id="user2" style="display:inline;">
-            <option value="en">English</option>
-            <option value="es">Spanish</option>
-          </select>
-=======
->>>>>>> 2929990e972db4e54d77dc2f0e565545379c50a0
 
 
-<<<<<<< HEAD
-        </form>
-        <span id="txtAjaxOutput2"> <!-- testme 2 --></span>
-      </div>
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> mergeFixCaalWIthmaster
-=======
->>>>>>> cd29fc18a220ab3241d69b590dc7b5a27eda5169
->>>>>>> ac77d30760b576df1fc9d4a8dd06e0e0c7d4936d
-=======
->>>>>>> 2929990e972db4e54d77dc2f0e565545379c50a0
-=======
-
-
->>>>>>> latenight9clockp3
     </div>
   </div>
   </div>
@@ -168,41 +124,24 @@ $(document).ready(function(e){
       // $chat.append('<span class="error">' + token +"runs line 124 index" +"</span><br/>");
     });
 
-  });
-
+});
 
   socket.on('back2Front',function(data){
-<<<<<<< HEAD
-<<<<<<< HEAD
-    // console.log(data.sockLang );
-    if(data.sockLang === "es" ){
-=======
+      socket.emit('sent message',data, function(data){
 
+    });
     // console.log(data.sockLang );
     if(data.sockLang === "es" ){
       console.log(userName);
       console.log(data.userID + "bacone id");
->>>>>>> 2929990e972db4e54d77dc2f0e565545379c50a0
-=======
 
-    // console.log(data.sockLang );
-    if(data.sockLang === "es" ){
-      console.log(userName);
-      console.log(data.userID + "bacone id");
->>>>>>> latenight9clockp3
       console.log("i ran");
       console.log(data.original);
        $('#txtAjaxOutput').append("<div>"+data.userID+": "+data.original+"</div>");
     }else{
       $('#txtAjaxOutput').append("<div>"+data.userID+": " +data.response +"</div>");
     }
-<<<<<<< HEAD
-<<<<<<< HEAD
-    console.log()
-=======
->>>>>>> 2929990e972db4e54d77dc2f0e565545379c50a0
-=======
->>>>>>> latenight9clockp3
+
      console.log(data);
     // $('#txtAjaxOutput').append("<div>"+data[0]+"</div>");
     // console.log(data);
