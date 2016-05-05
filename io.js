@@ -48,7 +48,7 @@ io.on('connection', function (socket) {
       }
     })
     // .then(response => console.log(response))
-    .then(response => io.sockets.emit('back2Front',{response:response,original: data.toTrans,dl:data.lang,dl2:data.lang2}))
+    .then(response => io.sockets.emit('back2Front',{response:response,original: data.toTrans,dl:data.lang,dl2:data.lang2,userID:data.userID,uname:data.uname}))
     .catch(err => console.log(err))
     // io.sockets.emit('back2Front',data);
   });

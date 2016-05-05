@@ -14,8 +14,10 @@
   //letting client side js know what our user id is
   //this makes it vidible to the js running in the web page
     var userId = '';
+    var usermame='';
     <$ if (user) { $>
       userId = '<$= user.id $>';
+     username= '<$= user.name $>';
     <$ } $>
 </script>
 
@@ -78,7 +80,7 @@
  <script>
     var userId = '';
     <$ if (user) { $>
-      userId = '<$= user.id $>';
+      userId = '<$= user.name $>';
     <$ } $>
   </script>
 
@@ -106,7 +108,7 @@ $(document).ready(function(e){
     var pleaseTranslateMe = $('#txtAjaxInput').val();
     var userLang = $("#user").val();
     var otherLang = userLang == "en" ? "es" : "en";
-    var passTranLang={toTrans: pleaseTranslateMe, lang:userLang, lang2:otherLang};
+    var passTranLang={toTrans: pleaseTranslateMe, lang:userLang, lang2:otherLang,userID:userId,uname:user.name};
     socket.emit('wasClicked', passTranLang, function(data){
       console.log(data + " was clicked was run heere ");
       // token =data.toString();
@@ -121,12 +123,13 @@ $(document).ready(function(e){
 
     // console.log(data.sockLang );
     if(data.sockLang === "es" ){
-
+      console.log(userName);
+      console.log(data.userID + "bacone id");
       console.log("i ran");
       console.log(data.original);
-       $('#txtAjaxOutput').append("<div>"+data.original+"</div>");
+       $('#txtAjaxOutput').append("<div>"+data.userID+": "+data.original+"</div>");
     }else{
-      $('#txtAjaxOutput').append("<div>"+data.response+"</div>");
+      $('#txtAjaxOutput').append("<div>"+data.userID+": " +data.response +"</div>");
     }
      console.log(data);
     // $('#txtAjaxOutput').append("<div>"+data[0]+"</div>");
@@ -143,4 +146,3 @@ $(document).ready(function(e){
   </script>
 </body>
 </html>
-
