@@ -5,6 +5,7 @@ rp = require('request-promise')
 var key = require('./config/key')
 var Chat = require('./models/chat');
 var bacon;
+ var totalTranslations =[];
 // var currentToken ;
 // console.log(currentToken)
 function runToken(){
@@ -39,7 +40,7 @@ io.on('connection', function (socket) {
 
     socket.originalLanguage = data.lang;
     console.log(socket.originalLanguage);
-    var totalTranslations =[];
+
 
     rp({
       method: "GET",
@@ -64,18 +65,19 @@ io.on('connection', function (socket) {
         uri: "http://api.microsofttranslator.com/V2/Ajax.svc/Translate",
         qs: {
           appId: "Bearer" + " " + bacon,
-        from: data.lang, //chnage to actual values not jquery backside
-        to: data.lang2,
-        text: data.toTrans
+          from: data.lang, //chnage to actual values not jquery backside
+          to: data.lang2,
+          text: data.toTrans
+        }
       }
-    }
-    ))
+    )
     // .then(response => console.log(response))
 
     .then( function(response){
       console.log(response + " 2");
       return totalTranslations.push({response:response,original: data.toTrans,dl:data.lang,dl2:data.lang2,userID:data.userID});
-    }).then(
+    }))
+    .then(
      rp({
       method: "GET",
       uri: "http://api.microsofttranslator.com/V2/Ajax.svc/Translate",
@@ -85,12 +87,12 @@ io.on('connection', function (socket) {
         to: data.lang3,
         text: data.toTrans
       }
-    }).then(  function(response){
+    })
+     .then(  function(response){
       console.log(response+ " 3");
-      totalTranslations.push({response:response,original: data.toTrans,dl:data.lang,dl2:data.lang3,userID:data.userID});
+      return totalTranslations.push({response:response,original: data.toTrans,dl:data.lang,dl2:data.lang3,userID:data.userID});
     }
     ))
-
     .then(
       rp({
         method: "GET",
@@ -101,16 +103,18 @@ io.on('connection', function (socket) {
         to: data.lang4,
         text: data.toTrans
       }
-    }).then(function(response){
-      console.log(response+" 4")
-      totalTranslations.push({response:response,original: data.toTrans,dl:data.lang,dl2:data.lang4,userID:data.userID});
-      console.log(totalTranslations[2] + " All the messages");
+    })
+      .then(function(response){
+        console.log(response+" 4")
+        return totalTranslations.push({response:response,original: data.toTrans,dl:data.lang,dl2:data.lang4,userID:data.userID});
+      // console.log(totalTranslations[2] + " All the messages");
     }
 
     ))
-    .then(
+    .then(function(response) {
+      console.log(totalTranslations);
       io.sockets.emit('back2Front', totalTranslations)
-      )
+      })
     .catch(err => console.log(err))
     // io.sockets.emit('back2Front',data);
   });
