@@ -31,7 +31,8 @@ body{
 
   }
 
-  .chatbox {
+.chatbox {
+  font-family: 'Quicksand', sans-serif;
   width: 90%;
   height: 100%;
   max-width: 960px;
@@ -46,12 +47,60 @@ body{
   bottom:20px;
   left:0;
   right:0;
-  overflow:hidden;
+
   z-index:-1;
   }
 
 
+#side-nav {
+  background-color: red;
+  height: 100%;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.header {
+
+    height: 40px;
+    height: 59px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    border-radius: 19px;
+    margin-top: -30px;
+    text-align: right;
+}
+
+#input-box {
+
+  position: absolute;
+  bottom: 0px;
+  width: 74%;
+}
 
 
 
+  .bubble
+{
+position: relative;
+width: 698px;
+height: 350px;
+padding: 15px;
+background: #363F40;
+-webkit-border-radius: 10px;
+-moz-border-radius: 10px;
+border-radius: 10px;
+overflow: scroll;
+}
 
+.bubble:after
+{
+content: '';
+position: absolute;
+border-style: solid;
+border-width: 0 15px 15px;
+border-color: #94C2ED transparent;
+display: block;
+width: 0;
+z-index: 1;
+top: -15px;
+left: 64px;
+}
