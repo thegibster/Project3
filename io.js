@@ -36,29 +36,31 @@ io.on('connection', function (socket) {
   socket.on('wasClicked', function(data){
     console.log("the button was clicked on the front")
 
-    // data=bacon;
     socket.originalLanguage = data.lang;
     console.log(socket.originalLanguage);
+
     rp({
       method: "GET",
       uri: "http://api.microsofttranslator.com/V2/Ajax.svc/Translate",
       qs: {
         appId: "Bearer" + " " + bacon,
+
         from: "en", //chnage to actual values not jquery backside
         to: "es",
+
+        from: data.lang, //chnage to actual values not jquery backside
+        to: data.lang2,
+
         text: data.toTrans
       }
     })
     // .then(response => console.log(response))
-    .then(response => io.sockets.emit('back2Front',{response:response,original: data.toTrans,dl:data.lang,dl2:data.lang2,sockLang:socket.originalLanguage}))
+
+    .then(response => io.sockets.emit('back2Front',{response:response,original: data.toTrans,dl:data.lang,dl2:data.lang2,userID:data.userID,uname:data.uname}))
+
     .catch(err => console.log(err))
     // io.sockets.emit('back2Front',data);
   });
-
-
-
-
-
 
 
   //Emit the rooms array
