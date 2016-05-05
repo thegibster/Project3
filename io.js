@@ -35,8 +35,10 @@ io.on('connection', function (socket) {
 
   socket.on('wasClicked', function(data){
     console.log("the button was clicked on the front")
-    // data=bacon;
 
+    // data=bacon;
+    socket.originalLanguage = data.lang;
+    console.log(socket.originalLanguage);
     rp({
       method: "GET",
       uri: "http://api.microsofttranslator.com/V2/Ajax.svc/Translate",
@@ -48,7 +50,7 @@ io.on('connection', function (socket) {
       }
     })
     // .then(response => console.log(response))
-    .then(response => io.sockets.emit('back2Front',{response:response,original: data.toTrans,dl:data.lang,dl2:data.lang2}))
+    .then(response => io.sockets.emit('back2Front',{response:response,original: data.toTrans,dl:data.lang,dl2:data.lang2,sockLang:socket.originalLanguage}))
     .catch(err => console.log(err))
     // io.sockets.emit('back2Front',data);
   });
