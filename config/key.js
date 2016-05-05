@@ -3,6 +3,7 @@ var request = require("request-promise");
 // var Request = Promise.promisify(require('request'));
 // var currentToken={};
 
+//setting options for http request
 var options = { method: 'POST',
 url: 'https://datamarket.accesscontrol.windows.net/v2/OAuth2-13',
 headers:
@@ -28,5 +29,6 @@ grant_type: 'client_credentials' }
   // console.log("after all");
 
 // });
-
-module.exports= request(options);
+//exporting a function called new
+//which makes the http request and returns a promise
+module.exports.new = function() { return request(options);}

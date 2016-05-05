@@ -1,27 +1,64 @@
 var io = require('socket.io')();
 // var currentToken = require('currentToken');
-
+var request = require('request');
+rp = require('request-promise')
 var key = require('./config/key')
+var bacon;
 // var currentToken ;
 // console.log(currentToken)
-
-key.then((token) => console.log(token))
-console.log("after promise");
-
-
+function runToken(){
+  key.new().then((token) => bacon = (JSON.parse(token).access_token))
+// key.then((token) => console.log(token))
+// console.log("after promise");
+setTimeout(function(){console.log(bacon)},1000);
+};
+// key.new().then((token) => bacon = (JSON.parse(token).access_token))
+// // key.then((token) => console.log(token))
+// // console.log("after promise");
+// setTimeout(function(){console.log(bacon)},1000);
+// console.log(bacon + "dammmm gurl");
 io.on('connection', function (socket) {
-
+  runToken();
   console.log('Client connected to socket.io!');
   console.log("server side");
   // console.log(currentToken);
   var defaultRoom = 'everyone';
   var rooms = ["Everyone", "en-es", "en-fr"];
 
+  socket.on('winloaded',function(data){
+    data=bacon;
+    io.sockets.emit('winloaded',data);
+  });
+
+
+
+
   socket.on('wasClicked', function(data){
     console.log("the button was clicked on the front")
+    // data=bacon;
 
-    io.sockets.emit('back2Front',data);
-  })
+    rp({
+      method: "GET",
+      uri: "http://api.microsofttranslator.com/V2/Ajax.svc/Translate",
+      qs: {
+        appId: "Bearer" + " " + bacon,
+        from: "en", //chnage to actual values not jquery backside
+        to: "es",
+        text: data.toTrans
+      }
+    })
+    // .then(response => console.log(response))
+    .then(response => io.sockets.emit('back2Front',{response:response,original: data.toTrans,dl:data.lang,dl2:data.lang2}))
+    .catch(err => console.log(err))
+    // io.sockets.emit('back2Front',data);
+  });
+
+
+
+
+
+
+
   //Emit the rooms array
   socket.emit('setup', {
     rooms: rooms
@@ -36,7 +73,7 @@ io.on('connection', function (socket) {
   });
 
     //Listens for switch room
-  socket.on('switch room', function(data) {
+    socket.on('switch room', function(data) {
     //Handles joining and leaving rooms
     //console.log(data);
     socket.leave(data.oldRoom);

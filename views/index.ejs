@@ -67,9 +67,9 @@
           <$ } $>
 
 
-          <select id="user1">
-            <option value="en">English</option>
-            <option value="es">Spanish</option>
+          <select id="user" style ="display:inline;">
+            <option value="es">English</option>
+            <option value="en">Spanish</option>
           </select>
           <div>
             <input type="text" id="txtAjaxInput" value="you" />
@@ -80,6 +80,7 @@
         </form>
         <span id="txtAjaxOutput"> <!-- test me 1 --></span>
       </div>
+<<<<<<< HEAD
       <div class="col-xs-6" id = "chatsesh2">
         <form id="form2" runat="server">
           <h1>Message 2</h1>
@@ -98,6 +99,8 @@
         </form>
         <span id="txtAjaxOutput2"> <!-- testme 2 --></span>
       </div>
+=======
+>>>>>>> mergeFixCaalWIthmaster
     </div>
   </div>
  <script>
@@ -120,45 +123,44 @@
   <script>
   jQuery(function($){
     var socket = io.connect();
-  $('#btnAjaxTranslate').click(function(e){
+    var token ;
+$(document).ready(function(e){
+  console.log("document loaded");
+    socket.emit('winloaded');
 
-    socket.emit('wasClicked', $('#txtAjaxInput').val(), function(data){
-      $chat.append('<span class="error">' + data +"runs line 124 index" +"</span><br/>");
+  });
+
+  $('#btnAjaxTranslate').click(function(e){
+    var pleaseTranslateMe = $('#txtAjaxInput').val();
+    var userLang = $("#user").val();
+    var otherLang = userLang == "en" ? "es" : "en";
+    var passTranLang={toTrans: pleaseTranslateMe, lang:userLang, lang2:otherLang};
+    socket.emit('wasClicked', passTranLang, function(data){
+      console.log(data + " was clicked was run heere ");
+      // token =data.toString();
+      // console.log(token)
+      // $chat.append('<span class="error">' + token +"runs line 124 index" +"</span><br/>");
     });
 
   });
 
-        $('#btnAjaxTranslate').click(function (evt) {
-        var inputText = $('#txtAjaxInput').val();
-        user1txt = $('#txtAjaxInput').val();
-        var token="http%3a%2f%2fschemas.xmlsoap.org%2fws%2f2005%2f05%2fidentity%2fclaims%2fnameidentifier=9WdP3&http%3a%2f%2fschemas.microsoft.com%2faccesscontrolservice%2f2010%2f07%2fclaims%2fidentityprovider=https%3a%2f%2fdatamarket.accesscontrol.windows.net%2f&Audience=http%3a%2f%2fapi.microsofttranslator.com&ExpiresOn=1462389629&Issuer=https%3a%2f%2fdatamarket.accesscontrol.windows.net%2f&HMACSHA256=PHJKotrs%2b%2bEfJ2cHUWBDQHKWbPv%2b3n0183X9DFXbklY%3d";
-        var authToken =token;
-        var data = {
-          appId: 'Bearer ' + authToken,
-          from: $("#user1").val(),
-          to: $("#user2").val(),
-          contentType: 'text/plain',
-          text: inputText
-        };
-        $.ajax({
-          url: "http://api.microsofttranslator.com/V2/Ajax.svc/Translate",
-          dataType: 'jsonp',
-          data: data,
-          jsonp: 'oncomplete'
-        })
-        .done(function (jqXHR, textStatus, errorThrown) {
-          console.log('done', this, jqXHR, textStatus, errorThrown);
-          console.log(jqXHR);
-          $('#txtAjaxOutput').append($('#txtAjaxInput').val()+'<br>');
-          $('#txtAjaxOutput2').append("<div>"+(jqXHR)+"</div>");
-        })
-        .fail(function (jqXHR, textStatus, errorThrown) {
-          console.log('fail', this, jqXHR, textStatus, errorThrown);
-        });
-      });
+
   socket.on('back2Front',function(data){
-    console.log(data);
+    console.log(socket);
+    if(data.dl === "es" ){
+      console.log("i ran");
+      console.log(data.original);
+       $('#txtAjaxOutput').append("<div>"+data.original+"</div>");
+    }else{
+      $('#txtAjaxOutput').append("<div>"+data.response+"</div>");
+    }
+     console.log(data);
+    // $('#txtAjaxOutput').append("<div>"+data[0]+"</div>");
+    // console.log(data);
     console.log("Im front and got response from the back");
+  });
+  socket.on('winloaded',function(data){
+    console.log("receied the win load event");
   })
 });
 
