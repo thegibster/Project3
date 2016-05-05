@@ -1,5 +1,4 @@
 var mongoose = require('mongoose');
-
 var chatSchema = new mongoose.Schema({
   original_message: String,
   original_language: String,
