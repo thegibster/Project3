@@ -181,9 +181,9 @@ $(document).ready(function(e){
 
   socket.on('back2Front',function(data){
     console.log(data + " This should be data");
-    //   socket.emit('sent message',data, function(data){
+      socket.emit('sent message',data, function(data){
 
-    // });
+    });
 
     // console.log(data.sockLang );
     // if(data.sockLang === "es" ){
