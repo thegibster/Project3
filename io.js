@@ -35,6 +35,7 @@ io.on('connection', function (socket) {
 
 
   socket.on('wasClicked', function(data){
+    totalTranslations =[];
     console.log("the button was clicked on the front")
 
     socket.originalLanguage = data.lang;
