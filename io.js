@@ -5,7 +5,7 @@ rp = require('request-promise')
 var key = require('./config/key')
 var Chat = require('./models/chat');
 var bacon;
- var totalTranslations =[];
+var totalTranslations =[];
 // var currentToken ;
 // console.log(currentToken)
 function runToken(){
@@ -31,8 +31,6 @@ io.on('connection', function (socket) {
     data=bacon;
     io.sockets.emit('winloaded',data);
   });
-
-
 
   socket.on('wasClicked', function(data){
     totalTranslations =[];
@@ -98,8 +96,8 @@ io.on('connection', function (socket) {
         from: data.lang, //chnage to actual values not jquery backside
         to: data.lang4,
         text: data.toTrans
-        }
-      })
+      }
+    })
     })
     .then(function(response){
       console.log(response+" 4")
@@ -110,7 +108,7 @@ io.on('connection', function (socket) {
       console.log(response + " levl4 ")
       console.log(totalTranslations);
       io.sockets.emit('back2Front', totalTranslations)
-      })
+    })
     .catch(err => console.log(err))
     // io.sockets.emit('back2Front',data);
   });
@@ -144,11 +142,15 @@ io.on('connection', function (socket) {
       // console.log(data.trim());
     //Create message
     var newMsg = new Chat({
-      original_message: data.original,
-      original_language: data.dl,
-      translated_message: data.response,
-      translated_language: data.dl2,
-      user_name: data.userID
+      original_message: data[0].original,
+      original_language: data[0].dl2,
+      translated_message1: data[1].response,
+      translated_language1: data[1].dl,
+      translated_message2: data[2].response,
+      translated_language2: data[2].dl2,
+      translated_message3: data[3].response,
+      translated_language3: data[3].dl2,
+      user_name: data[0].userID
 
       // room: data.room.toLowerCase(), //this is for when we adding the rooms part
     });
@@ -179,5 +181,4 @@ console.log("io is running");
 // console.log(io.sockets);
 // console.log(io.of('/') );
 });
-
 module.exports = io;

@@ -108,9 +108,8 @@
           </select>
            <div>
 
-
+<br><br>
         </div>
-          <h2>Output 1</h2>
 
         </form>
        <div class="bubble">
@@ -182,9 +181,9 @@ $(document).ready(function(e){
 
   socket.on('back2Front',function(data){
     console.log(data + " This should be data");
-    //   socket.emit('sent message',data, function(data){
+      socket.emit('sent message',data, function(data){
 
-    // });
+    });
 
     // console.log(data.sockLang );
     // if(data.sockLang === "es" ){
@@ -202,7 +201,7 @@ $(document).ready(function(e){
     $('#txtAjaxOutput').append("<div><br></div>");
     function runThroughData(item, index){
        console.log(item.userID + " This is an item");
-      $('#txtAjaxOutput').append("<div>"+item.userID+": "+item.response+"</div>");
+      $('#txtAjaxOutput').append("<div>"+item.userID+": "+item.response+ " ("+item.dl2+")"+"</div>");
     }
     // $('#txtAjaxOutput').append("<div>"+data.userID+": "+data.original+"</div>");
     // $('#txtAjaxOutput').append("<div>"+data.userID+": " +data.response +"</div>");
