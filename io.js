@@ -41,7 +41,6 @@ io.on('connection', function (socket) {
     socket.originalLanguage = data.lang;
     console.log(socket.originalLanguage);
 
-
     rp({
       method: "GET",
       uri: "http://api.microsofttranslator.com/V2/Ajax.svc/Translate",
