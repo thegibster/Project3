@@ -5,7 +5,7 @@ rp = require('request-promise')
 var key = require('./config/key')
 var Chat = require('./models/chat');
 var bacon;
- var totalTranslations =[];
+var totalTranslations =[];
 // var currentToken ;
 // console.log(currentToken)
 function runToken(){
@@ -31,7 +31,6 @@ io.on('connection', function (socket) {
     data=bacon;
     io.sockets.emit('winloaded',data);
   });
-
 
 
   socket.on('wasClicked', function(data){
@@ -98,8 +97,8 @@ io.on('connection', function (socket) {
         from: data.lang, //chnage to actual values not jquery backside
         to: data.lang4,
         text: data.toTrans
-        }
-      })
+      }
+    })
     })
     .then(function(response){
       console.log(response+" 4")
@@ -110,7 +109,7 @@ io.on('connection', function (socket) {
       console.log(response + " levl4 ")
       console.log(totalTranslations);
       io.sockets.emit('back2Front', totalTranslations)
-      })
+    })
     .catch(err => console.log(err))
     // io.sockets.emit('back2Front',data);
   });

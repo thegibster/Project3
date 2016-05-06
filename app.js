@@ -13,7 +13,6 @@ require('dotenv').config()
 var mongoose = require('mongoose');
 // mongoose.connect('mongodb://localhost/family-tree');
 
-
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
