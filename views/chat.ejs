@@ -146,6 +146,7 @@
   jQuery(function($){
     var socket = io.connect();
     var token ;
+    var userLang;
 $(document).ready(function(e){
   console.log("document loaded");
     socket.emit('winloaded');
@@ -154,7 +155,7 @@ $(document).ready(function(e){
 
   $('#btnAjaxTranslate').click(function(e){
     var pleaseTranslateMe = $('#txtAjaxInput').val().trim();
-    var userLang = $("#user").val();
+     userLang = $("#user").val();
     //var otherLang = userLang == "en" ? "es" : "en";
     switch (userLang) {
         case "es":
@@ -200,9 +201,14 @@ $(document).ready(function(e){
 
     data.forEach(runThroughData);
     $('#txtAjaxOutput').append("<div><br></div>");
+
     function runThroughData(item, index){
-       console.log(item.userID + " This is an item");
-      $('#txtAjaxOutput').append("<div>"+item.userID+": "+item.response+ " ("+item.dl2+")"+"</div>");
+       console.log(item.dl + " This is an item" + userLang);
+
+       if(item.dl2 == userLang){
+          $('#txtAjaxOutput').append("<div>"+item.userID+": "+item.response+ " ("+item.dl2+")"+"</div>");
+       }
+
     }
     // $('#txtAjaxOutput').append("<div>"+data.userID+": "+data.original+"</div>");
     // $('#txtAjaxOutput').append("<div>"+data.userID+": " +data.response +"</div>");
