@@ -32,6 +32,17 @@ io.on('connection', function (socket) {
     io.sockets.emit('winloaded',data);
     io.sockets.emit('userscame',data);
   });
+  // socket.on('disconnect',function(data){
+  //   io.sockets.emit("userLeft",data);
+  // }
+
+  //   );
+  // socket.on("languageChange",function(data){
+  //     io.sockets.emit("languageChange",data);
+  //    }
+
+  //   );
+
 
   socket.on('wasClicked', function(data){
     totalTranslations =[];

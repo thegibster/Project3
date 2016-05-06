@@ -147,6 +147,7 @@
     var token ;
     var userLang;
     var users = [];
+
 $(document).ready(function(e){
   console.log("document loaded");
     socket.emit('winloaded');
@@ -187,6 +188,7 @@ $(document).ready(function(e){
 
     });
 
+
     // console.log(data.sockLang );
     // if(data.sockLang === "es" ){
     //   console.log(userName);
@@ -221,6 +223,15 @@ $(document).ready(function(e){
     console.log("Im front and got response from the back");
   });
 
+  //   $("#user").click(function(data){
+  //   socket.emit("languageChange", data);
+  // });
+  // socket.on('languageChange',function(data){
+  //   console.log("lan chage was activated");
+  //     userLang = $("#user").val();
+  //     }
+  //   );
+
     socket.on('userscame', function(data){
         var html ;
         users+= userId;
@@ -230,6 +241,9 @@ $(document).ready(function(e){
          // $("#side-nav").css('color:white;');
       });
 
+    // socket.on('userLeft',function(){
+
+    // });
 
   socket.on('winloaded',function(data){
     console.log("receied the win load event");
