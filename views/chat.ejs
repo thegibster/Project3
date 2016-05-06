@@ -202,7 +202,7 @@ $(document).ready(function(e){
     $('#txtAjaxOutput').append("<div><br></div>");
     function runThroughData(item, index){
        console.log(item.userID + " This is an item");
-      $('#txtAjaxOutput').append("<div>"+item.userID+": "+item.response+"</div>");
+      $('#txtAjaxOutput').append("<div>"+item.userID+": "+item.response+ " ("+item.dl2+")"+"</div>");
     }
     // $('#txtAjaxOutput').append("<div>"+data.userID+": "+data.original+"</div>");
     // $('#txtAjaxOutput').append("<div>"+data.userID+": " +data.response +"</div>");
