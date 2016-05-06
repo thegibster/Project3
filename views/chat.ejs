@@ -86,7 +86,7 @@
 
 <div class="chatbox">
     <div class="row">
-      <div class="col s3" id="side-nav">Test Div</div>
+      <div class="col s3" id="side-nav" style="color:white;"></div>
       <div class="col s9" id ="chatsesh1">
       <div class="header">
           <h1>Chat Room </h1>
@@ -147,6 +147,7 @@
     var socket = io.connect();
     var token ;
     var userLang;
+    var users = [];
 $(document).ready(function(e){
   console.log("document loaded");
     socket.emit('winloaded');
@@ -220,6 +221,17 @@ $(document).ready(function(e){
     // console.log(data);
     console.log("Im front and got response from the back");
   });
+
+    socket.on('userscame', function(data){
+        var html ;
+        users+= userId;
+        for(var i=0; i < users.length; i++){
+          $("#side-nav").append(users[i]);
+        }
+         // $("#side-nav").css('color:white;');
+      });
+
+
   socket.on('winloaded',function(data){
     console.log("receied the win load event");
   })
