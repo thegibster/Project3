@@ -32,7 +32,6 @@ io.on('connection', function (socket) {
     io.sockets.emit('winloaded',data);
   });
 
-
   socket.on('wasClicked', function(data){
     totalTranslations =[];
     console.log("the button was clicked on the front")
